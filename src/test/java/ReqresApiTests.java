@@ -44,14 +44,17 @@ public class ReqresApiTests extends TestBase {
         String userFirstName = "Emma";
         String userLastName = "Wong";
 
-        get("/users/" + userId)
+        given()
+                    .log().all()
+                .when()
+                    .get("/users/" + userId)
                 .then()
-                .log().all()
-                .statusCode(200)
-                .body("data.email", is(userEmail))
-                .body("data.first_name", is(userFirstName))
-                .body("data.last_name", is(userLastName))
-                .body("data.avatar", is("https://reqres.in/img/faces/" + userId + "-image.jpg"));
+                    .log().all()
+                    .statusCode(200)
+                    .body("data.email", is(userEmail))
+                    .body("data.first_name", is(userFirstName))
+                    .body("data.last_name", is(userLastName))
+                    .body("data.avatar", is("https://reqres.in/img/faces/" + userId + "-image.jpg"));
 
     }
 
@@ -98,8 +101,13 @@ public class ReqresApiTests extends TestBase {
     @DisplayName("Успешное удаление пользователя")
     @Test
     void successfulDeleteUser() {
-        delete("/users/2")
-                .then()
+        int userId = 2;
+
+        given()
+                .log().all()
+            .when()
+                .delete("/users/" + userId)
+            .then()
                 .log().all()
                 .statusCode(204);
     }
