@@ -26,9 +26,11 @@ public class ReqresApiTests extends TestBase {
                 .body("{\"name\": \"" + userName + "\", \"job\": \"" + userJob + "\"}")
                 .contentType(JSON)
                 .log().all()
-            .when()
+
+                .when()
                 .post("/users")
-            .then()
+
+                .then()
                 .log().all()
                 .statusCode(201)
                 .body("name", is(userName))
@@ -45,16 +47,18 @@ public class ReqresApiTests extends TestBase {
         String userLastName = "Wong";
 
         given()
-                    .log().all()
+                .log().all()
+
                 .when()
-                    .get("/users/" + userId)
+                .get("/users/" + userId)
+
                 .then()
-                    .log().all()
-                    .statusCode(200)
-                    .body("data.email", is(userEmail))
-                    .body("data.first_name", is(userFirstName))
-                    .body("data.last_name", is(userLastName))
-                    .body("data.avatar", is("https://reqres.in/img/faces/" + userId + "-image.jpg"));
+                .log().all()
+                .statusCode(200)
+                .body("data.email", is(userEmail))
+                .body("data.first_name", is(userFirstName))
+                .body("data.last_name", is(userLastName))
+                .body("data.avatar", is("https://reqres.in/img/faces/" + userId + "-image.jpg"));
 
     }
 
@@ -68,12 +72,14 @@ public class ReqresApiTests extends TestBase {
         String userJob = "engineer";
 
         given()
-                .body("{\"job\": \"" + userJob +"\"}")
+                .body("{\"job\": \"" + userJob + "\"}")
                 .contentType(JSON)
                 .log().all()
-        .when()
+
+                .when()
                 .patch("/users/2")
-        .then()
+
+                .then()
                 .log().status()
                 .log().body()
                 .statusCode(200)
@@ -88,9 +94,11 @@ public class ReqresApiTests extends TestBase {
                 .body("{\"email\": \"sydney@fife\"}")
                 .contentType(JSON)
                 .log().all()
-        .when()
+
+                .when()
                 .post("/register")
-        .then()
+
+                .then()
                 .log().status()
                 .log().body()
                 .statusCode(400)
@@ -105,9 +113,11 @@ public class ReqresApiTests extends TestBase {
 
         given()
                 .log().all()
-            .when()
+
+                .when()
                 .delete("/users/" + userId)
-            .then()
+
+                .then()
                 .log().all()
                 .statusCode(204);
     }
